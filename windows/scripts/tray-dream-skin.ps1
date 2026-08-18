@@ -143,7 +143,7 @@ try {
     $shell = New-Object -ComObject WScript.Shell
     $shortcut = $shell.CreateShortcut($startupShortcut)
     $shortcut.TargetPath = $powershell
-    $shortcut.Arguments = "-NoProfile -STA -WindowStyle Hidden -ExecutionPolicy RemoteSigned -File `"$PSScriptRoot\tray-dream-skin.ps1`""
+    $shortcut.Arguments = "-NoProfile -STA -WindowStyle Hidden -ExecutionPolicy RemoteSigned -File `"$PSScriptRoot\tray-dream-skin.ps1`" -Port $Port"
     $shortcut.WorkingDirectory = $SkillRoot
     $shortcut.Description = 'Start Codex Dream Skin in the notification area'
     $shortcut.Save()
