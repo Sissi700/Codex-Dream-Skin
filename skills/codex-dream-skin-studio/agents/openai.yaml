@@ -1,0 +1,4 @@
+interface:
+  display_name: Codex Dream Skin Studio
+  short_description: Build and safely apply a Codex visual skin
+  default_prompt: Create or refine a Codex Dream Skin from the user's approved image and visual brief, then validate, save, and safely apply it.
