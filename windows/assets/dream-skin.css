@@ -1,25 +1,168 @@
 /* Canonical cross-platform skin. Run tools/sync-runtime-assets.mjs after editing. */
 @layer dreamskin-accessibility, dreamskin-community;
 
+/* Seaside paper surfaces keep the native shell readable over the artwork. */
+html[data-dream-skin="active"] .composer-surface-chrome,
+html[data-dream-skin="active"] [data-ds-part="composer"] {
+  background: rgba(185, 221, 229, .82) !important;
+  color: #425B68 !important;
+  border: 1px solid rgba(63, 143, 206, .52) !important;
+  box-shadow: 0 8px 22px rgba(66, 91, 104, .16), inset 0 1px rgba(255, 255, 255, .72) !important;
+}
+
+html[data-dream-skin="active"] .composer-surface-chrome textarea,
+html[data-dream-skin="active"] .composer-surface-chrome input,
+html[data-dream-skin="active"] [data-ds-part="composer"] textarea,
+html[data-dream-skin="active"] [data-ds-part="composer"] input {
+  background: rgba(185, 221, 229, .62) !important;
+  color: #425B68 !important;
+  caret-color: #3F8FCE !important;
+  border-color: rgba(63, 143, 206, .62) !important;
+  box-shadow: inset 0 1px rgba(255, 255, 255, .86), inset 0 -1px rgba(63, 143, 206, .12) !important;
+}
+
+html[data-dream-skin="active"] .composer-surface-chrome textarea:focus,
+html[data-dream-skin="active"] .composer-surface-chrome input:focus,
+html[data-dream-skin="active"] [data-ds-part="composer"] textarea:focus,
+html[data-dream-skin="active"] [data-ds-part="composer"] input:focus {
+  border-color: #F3D96B !important;
+  box-shadow: 0 0 0 3px rgba(243, 217, 107, .22), inset 0 1px rgba(255, 255, 255, .9) !important;
+}
+
+html[data-dream-skin="active"] .composer-surface-chrome p.placeholder::after,
+html[data-dream-skin="active"] [data-ds-part="composer"] ::placeholder {
+  color: #6E8993 !important;
+  opacity: 1 !important;
+}
+
+html[data-dream-skin="active"] main,
+html[data-dream-skin="active"] [role="main"],
+html[data-dream-skin="active"] [class*="_markdown"],
+html[data-dream-skin="active"] [data-message-author-role] {
+  color: #425B68 !important;
+}
+
+/* Keep the composer model control English and softly orange without changing
+   the native menu semantics or its available options. */
+html[data-dream-skin="active"] .composer-surface-chrome button[aria-haspopup="menu"] {
+  color: #E39A5C !important;
+  font-size: 0 !important;
+  border-color: rgba(243, 180, 119, .58) !important;
+  background: rgba(255, 248, 232, .78) !important;
+}
+
+html[data-dream-skin="active"] .composer-surface-chrome button[aria-haspopup="menu"]::after {
+  content: "5.6 Luna · Balanced";
+  font-family: "Quicksand", "Nunito", "Segoe UI", sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  color: #E39A5C !important;
+  white-space: nowrap;
+}
+
+/* Cel-animation treatment for the home action tiles: flat paper blocks,
+   crisp ink edges, and a small offset highlight instead of soft glass. */
+html[data-dream-skin="active"] [role="main"]:has([data-testid="home-icon"]) .group\/home-suggestions button {
+  min-height: 118px !important;
+  border: 2px solid rgba(63, 143, 206, .34) !important;
+  border-radius: 10px !important;
+  background: linear-gradient(180deg, rgba(255, 248, 232, .96), rgba(234, 246, 245, .88)) !important;
+  color: #425B68 !important;
+  box-shadow: 4px 4px 0 rgba(243, 180, 119, .42), inset 0 0 0 1px rgba(255, 255, 255, .84) !important;
+  backdrop-filter: none !important;
+  overflow: hidden !important;
+}
+
+html[data-dream-skin="active"] [role="main"]:has([data-testid="home-icon"]) .group\/home-suggestions button::before {
+  content: "" !important;
+  position: absolute;
+  inset: 6px;
+  border: 1px solid rgba(243, 180, 119, .42);
+  border-radius: 6px;
+  pointer-events: none;
+}
+
+html[data-dream-skin="active"] [role="main"]:has([data-testid="home-icon"]) .group\/home-suggestions button > span:first-child > span:first-child {
+  position: relative;
+  z-index: 1;
+  border: 2px solid rgba(63, 143, 206, .48) !important;
+  border-radius: 8px !important;
+  background: #B9DDE5 !important;
+  box-shadow: 3px 3px 0 rgba(243, 180, 119, .36) !important;
+}
+
+html[data-dream-skin="active"] [role="main"]:has([data-testid="home-icon"]) .group\/home-suggestions button > span:last-child {
+  position: relative;
+  z-index: 1;
+  color: #3F8FCE !important;
+  font-weight: 600 !important;
+}
+
+html[data-dream-skin="active"] [role="main"]:has([data-testid="home-icon"]) .group\/home-suggestions button:hover {
+  transform: translate(-1px, -2px) !important;
+  border-color: #3F8FCE !important;
+  background: linear-gradient(180deg, #FFF8E8, #F3D96B) !important;
+  box-shadow: 5px 6px 0 rgba(243, 180, 119, .48), inset 0 0 0 1px rgba(255, 255, 255, .9) !important;
+}
+
+/* The composer is the paper sheet; the native textarea should not draw a
+   second box inside it. */
+html[data-dream-skin="active"] .composer-surface-chrome textarea,
+html[data-dream-skin="active"] [data-ds-part="composer"] textarea {
+  border: 0 !important;
+  outline: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+html[data-dream-skin="active"] .composer-surface-chrome textarea:focus,
+html[data-dream-skin="active"] [data-ds-part="composer"] textarea:focus {
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: 0 0 0 3px rgba(243, 217, 107, .14) !important;
+}
+
+/* Postmark edges: major paper surfaces use a soft dashed rule, while small
+   controls keep their solid outlines for affordance and scanability. */
+html[data-dream-skin="active"] .composer-surface-chrome,
+html[data-dream-skin="active"] [data-ds-part="composer"] {
+  border: 1px dashed rgba(63, 143, 206, .56) !important;
+}
+
+html[data-dream-skin="active"] [class*="_homeUtilityBar_"],
+html[data-dream-skin="active"] [role="main"]:has([data-testid="home-icon"]) .group\/project-selector {
+  border: 1px dashed rgba(63, 143, 206, .42) !important;
+}
+
+html[data-dream-skin="active"] [role="main"]:has([data-testid="home-icon"]) .group\/home-suggestions button {
+  border: 1px dashed rgba(63, 143, 206, .52) !important;
+  box-shadow: 4px 4px 0 rgba(243, 180, 119, .28), inset 0 0 0 1px rgba(255, 255, 255, .72) !important;
+}
+
+html[data-dream-skin="active"] [role="main"]:has([data-testid="home-icon"]) .group\/home-suggestions button:hover {
+  border-style: dashed !important;
+  border-color: #3F8FCE !important;
+}
+
 :root[data-dream-skin="active"] {
-  color-scheme: dark !important;
-  --ds-bg: #111318;
-  --ds-panel: #191c22;
-  --ds-panel-2: #20242b;
-  --ds-green: #8298a3;
-  --ds-lime: #a0adb3;
-  --ds-cyan: #8da397;
-  --ds-purple: #9d94a3;
-  --ds-text: #edf0f1;
-  --ds-muted: #a3aaae;
-  --ds-line: rgba(130, 152, 163, .24);
-  --ds-bg-rgb: 17 19 24;
-  --ds-panel-rgb: 25 28 34;
-  --ds-panel-2-rgb: 32 36 43;
-  --ds-text-rgb: 237 240 241;
-  --ds-muted-rgb: 163 170 174;
-  --ds-accent-rgb: 130 152 163;
-  --ds-secondary-rgb: 141 163 151;
+  color-scheme: light !important;
+  --ds-bg: #B9DDE5;
+  --ds-panel: #FFF8E8;
+  --ds-panel-2: #EAF6F5;
+  --ds-green: #3F8FCE;
+  --ds-lime: #7CCFE0;
+  --ds-cyan: #F3B477;
+  --ds-purple: #E9B8C7;
+  --ds-text: #425B68;
+  --ds-muted: #6E8993;
+  --ds-line: rgba(63, 143, 206, .28);
+  --ds-bg-rgb: 185 221 229;
+  --ds-panel-rgb: 255 248 232;
+  --ds-panel-2-rgb: 234 246 245;
+  --ds-text-rgb: 66 91 104;
+  --ds-muted-rgb: 110 137 147;
+  --ds-accent-rgb: 63 143 206;
+  --ds-secondary-rgb: 243 180 119;
   --ds-highlight-rgb: var(--ds-secondary-rgb);
   --ds-accent: var(--ds-green);
   --ds-accent-soft: var(--ds-lime);
@@ -54,9 +197,7 @@
   --ds-task-immersive-sidebar: rgb(var(--ds-panel-rgb) / .70);
   --ds-immersive-chrome: rgb(var(--ds-panel-rgb) / .28);
   --ds-immersive-composer: rgb(var(--ds-panel-rgb) / .44);
-  --ds-immersive-composer-solid: color-mix(in srgb,
-    rgb(var(--ds-panel-2-rgb)) 88%,
-    rgb(var(--ds-muted-rgb)) 12%);
+  --ds-immersive-composer-solid: rgb(var(--ds-panel-rgb) / .94);
   --ds-immersive-line: rgb(var(--ds-muted-rgb) / .42);
   --ds-task-immersive-edge: rgb(var(--ds-bg-rgb) / .82);
   --ds-task-immersive-mid: rgb(var(--ds-bg-rgb) / .74);
@@ -210,7 +351,7 @@ html[data-dream-skin="active"][data-dream-shell="light"]:is([data-dream-art-safe
 html[data-dream-skin="active"] body {
   background: var(--ds-bg) !important;
   color: var(--ds-text) !important;
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Microsoft YaHei UI", "Segoe UI", system-ui, sans-serif !important;
+  font-family: "Nunito", "Quicksand", "PingFang SC", "Microsoft YaHei UI", "Segoe UI", system-ui, sans-serif !important;
 }
 
 html[data-dream-skin="active"] body::before {
@@ -1274,6 +1415,63 @@ html[data-dream-skin="active"] button[class~="bg-token-foreground"] {
   background: var(--ds-accent) !important;
   color: var(--ds-on-accent) !important;
   box-shadow: 0 5px 14px rgb(var(--ds-accent-rgb) / .20) !important;
+}
+
+/* Sea-blue stationery controls: paper surfaces, fine colored rules, and
+   quiet focus treatment keep native Codex semantics readable. */
+html[data-dream-skin="active"] :is(button, input, textarea, select) {
+  font-family: inherit !important;
+  font-weight: 400 !important;
+  letter-spacing: 0 !important;
+}
+
+html[data-dream-skin="active"] :is(h1, h2, h3) {
+  font-family: "Quicksand", "Nunito", "PingFang SC", "Microsoft YaHei UI", "Segoe UI", sans-serif !important;
+  font-weight: 500 !important;
+  letter-spacing: 0 !important;
+}
+
+html[data-dream-skin="active"] main:is(.main-surface, [data-app-shell-main-surface], [class*="_MainContentSurface_"]) :is(button, [role="button"]) {
+  border: 1px solid rgb(var(--ds-accent-rgb) / .34) !important;
+  border-radius: 8px !important;
+  background: rgb(var(--ds-panel-rgb) / .74) !important;
+  color: var(--ds-text) !important;
+  box-shadow: 0 3px 10px rgb(var(--ds-bg-rgb) / .10) !important;
+}
+
+html[data-dream-skin="active"] main:is(.main-surface, [data-app-shell-main-surface], [class*="_MainContentSurface_"]) :is(button, [role="button"]):hover {
+  border-color: rgb(var(--ds-secondary-rgb) / .72) !important;
+  background: rgb(var(--ds-highlight-rgb) / .28) !important;
+  color: var(--ds-text) !important;
+}
+
+html[data-dream-skin="active"] main:is(.main-surface, [data-app-shell-main-surface], [class*="_MainContentSurface_"]) :is(button, [role="button"]):active,
+html[data-dream-skin="active"] main:is(.main-surface, [data-app-shell-main-surface], [class*="_MainContentSurface_"]) :is(button, [role="button"])[aria-pressed="true"] {
+  border-color: var(--ds-accent) !important;
+  background: var(--ds-accent) !important;
+  color: var(--ds-on-accent) !important;
+}
+
+html[data-dream-skin="active"] main:is(.main-surface, [data-app-shell-main-surface], [class*="_MainContentSurface_"]) :is(button, [role="button"]):disabled,
+html[data-dream-skin="active"] main:is(.main-surface, [data-app-shell-main-surface], [class*="_MainContentSurface_"]) :is(button, [role="button"])[aria-disabled="true"] {
+  border-color: rgb(var(--ds-muted-rgb) / .30) !important;
+  background: rgb(var(--ds-muted-rgb) / .16) !important;
+  color: rgb(var(--ds-muted-rgb) / .86) !important;
+  box-shadow: none !important;
+}
+
+html[data-dream-skin="active"] main:is(.main-surface, [data-app-shell-main-surface], [class*="_MainContentSurface_"]) :is(input, textarea, [contenteditable="true"]) {
+  border: 1px solid rgb(var(--ds-secondary-rgb) / .52) !important;
+  border-radius: 8px !important;
+  background: rgb(var(--ds-panel-rgb) / .72) !important;
+  color: var(--ds-text) !important;
+  box-shadow: inset 0 1px rgb(var(--ds-text-rgb) / .08) !important;
+}
+
+html[data-dream-skin="active"] main:is(.main-surface, [data-app-shell-main-surface], [class*="_MainContentSurface_"]) :is(input, textarea, [contenteditable="true"]):focus {
+  border-color: var(--ds-accent) !important;
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgb(var(--ds-accent-rgb) / .18), inset 0 1px rgb(var(--ds-text-rgb) / .08) !important;
 }
 
 html[data-dream-skin="active"] article,

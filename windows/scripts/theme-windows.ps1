@@ -523,13 +523,16 @@ function Initialize-DreamSkinThemeStore {
   $gothicDirectory = Join-Path $paths.Saved 'preset-gothic-void-crusade'
   $gothicTheme = Join-Path $gothicDirectory 'theme.json'
   $gothicSourceTheme = Join-Path $gothicSource 'theme.json'
-  $gothicSourceImage = Join-Path $gothicSource 'background.jpg'
+  $gothicSourceImage = @(
+    (Join-Path $gothicSource 'background.png'),
+    (Join-Path $gothicSource 'background.jpg')
+  ) | Where-Object { Test-Path -LiteralPath $_ -PathType Leaf } | Select-Object -First 1
   Assert-DreamSkinNoReparseComponents -Path $gothicDirectory
   Assert-DreamSkinNoReparseComponents -Path $gothicTheme
   if ((Test-Path -LiteralPath $gothicSourceTheme -PathType Leaf) -and
-    (Test-Path -LiteralPath $gothicSourceImage -PathType Leaf)) {
+    $null -ne $gothicSourceImage) {
     Ensure-DreamSkinManagedDirectory -Path $gothicDirectory -Root $paths.Root
-    $gothicImage = Join-Path $gothicDirectory 'background.jpg'
+    $gothicImage = Join-Path $gothicDirectory ([System.IO.Path]::GetFileName($gothicSourceImage))
     Assert-DreamSkinNoReparseComponents -Path $gothicImage
     Assert-DreamSkinImageFile -Path $gothicSourceImage
     Copy-Item -LiteralPath $gothicSourceImage -Destination $gothicImage -Force
@@ -538,33 +541,8 @@ function Initialize-DreamSkinThemeStore {
     Assert-DreamSkinNoReparseComponents -Path $gothicTheme
     Copy-Item -LiteralPath $gothicSourceTheme -Destination $gothicTheme -Force
   }
-  # Refresh the staged active copy of official presets too; otherwise metadata
-  # staged by an older engine (e.g. pre-#183 appearance "auto") keeps steering
-  # the appearanceTheme pin after upgrades.
-  if (Test-Path -LiteralPath $activeTheme -PathType Leaf) {
-    $activeId = ''
-    try {
-      $activeId = "$((Read-DreamSkinTheme -ThemeDirectory $paths.Active -SkipImageMetadata).Theme.id)"
-    } catch {}
-    $refreshSource = $null
-    if ($activeId -ceq $bundledPresetId) { $refreshSource = $assetRoot }
-    elseif ($activeId -ceq 'preset-gothic-void-crusade' -and
-      (Test-Path -LiteralPath $gothicSourceTheme -PathType Leaf)) { $refreshSource = $gothicSource }
-    if ($null -ne $refreshSource) {
-      $sourcePack = Read-DreamSkinTheme -ThemeDirectory $refreshSource
-      $sourceJson = Read-DreamSkinUtf8File -Path $sourcePack.ThemePath
-      $activeJson = Read-DreamSkinUtf8File -Path $activeTheme
-      if ($sourceJson -cne $activeJson) {
-        $sourceImageName = [System.IO.Path]::GetFileName($sourcePack.ImagePath)
-        $refreshedImage = Join-Path $paths.Active $sourceImageName
-        Assert-DreamSkinNoReparseComponents -Path $refreshedImage
-        Copy-Item -LiteralPath $sourcePack.ImagePath -Destination $refreshedImage -Force
-        Assert-DreamSkinNoReparseComponents -Path $refreshedImage
-        Assert-DreamSkinImageFile -Path $refreshedImage
-        Copy-Item -LiteralPath $sourcePack.ThemePath -Destination $activeTheme -Force
-      }
-    }
-  }
+  # The active theme is user state. Never refresh it from a bundled preset:
+  # doing so overwrites customized themes on every launcher/tray startup.
   $null = Read-DreamSkinTheme -ThemeDirectory $paths.Active
   return $paths
 }
